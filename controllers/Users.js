@@ -1,55 +1,76 @@
 const { request, response } = require('express')
+const User = require('../models/user')
+const bcrypt = require('bcryptjs');
 
-const getUsers = (req = request, res = response) => {
+const getUsers = async (req = request, res = response) => {
 
-  const { apikey } = req.query
+    const { from = 0, limit = 5 } = req.query
+    const query = { status: true }
 
-  res.json({
-    "msg": "get API - Controller",
-    apikey
-  })
-  res.end()
+    const [totalUsers, users] = await Promise.all([
+
+        User.countDocuments(query),
+        User
+            .find(query)
+            .skip(Number(from))
+            .limit(Number(limit))
+    ]);
+
+    res.json({ totalUsers, users });
+    res.end()
 };
 
-const putUsers = (req, res) => {
-  const { id } = req.params
-  res.status(202).json({
-    "msg": "put API - Controller",
-    id
-  })
-  res.end()
+const putUsers = async (req, res) => {
+    const { id } = req.params
+
+    const { _id, password, google, ...newInfo } = req.body
+
+    if (password) {
+        //Ecrypt password
+        const salt = bcrypt.genSaltSync()
+        newInfo.password = bcrypt.hashSync(password, salt)
+    }
+
+    const user = await User.findByIdAndUpdate(id, newInfo)
+
+    res.status(202).json(user)
+    res.end()
 }
 
-const postUsers = (req, res) => {
+const postUsers = async (req, res) => {
 
-  const { name, age } = req.body
+    const { name, mail, password, rol } = req.body
+    const user = new User({
+        name, mail, password, rol,
+    })
 
-  res.status(201).json({
-    "msg": "post API - Controller",
-    name,
-    age
-  })
-  res.end()
+    //Ecrypt password
+    const salt = bcrypt.genSaltSync()
+    user.password = bcrypt.hashSync(password, salt)
+
+    await user.save()
+    res.status(201).json({
+        user
+    })
+
+    res.end()
 }
 
-const deleteUsers = (req, res) => {
-  res.status(204).json({
-    "msg": "delete API - Controller"
-  })
-  res.end()
-}
+const deleteUsers = async (req, res) => {
 
-const patchUsers = (req, res) => {
-  res.status(201).json({
-    "msg": "patch API"
-  })
-  res.end()
+    const { id } = req.params
+
+    const user = await User.findByIdAndUpdate(id, { status: false })
+
+    res.json({
+        user
+    });
+    res.end();
 }
 
 module.exports = {
-  getUsers,
-  putUsers,
-  postUsers,
-  deleteUsers,
-  patchUsers
+    getUsers,
+    putUsers,
+    postUsers,
+    deleteUsers,
 }

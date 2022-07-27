@@ -1,5 +1,6 @@
 const express = require('express');
 const cors = require('cors');
+const { dbConnect } = require('../db/config');
 
 class Server {
 
@@ -7,13 +8,16 @@ class Server {
         this.app = express();
         this.port = process.env.PORT;
         this.usersPath = '/api/users'
+        this.URI = process.env.MONGO_URI
+
+        //Connect to DB
+        this.dbConnection()
 
         //Middlewares
         this.middlewares();
 
         //Routes
         this.routes();
-
     }
 
     middlewares() {
@@ -36,6 +40,10 @@ class Server {
         this.app.listen(this.port, () => {
             console.log(`Server running at port ${this.port}`);
         })
+    }
+
+    dbConnection() {
+        dbConnect(this.URI)
     }
 }
 
