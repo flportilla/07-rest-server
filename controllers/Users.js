@@ -17,7 +17,6 @@ const getUsers = async (req = request, res = response) => {
     ]);
 
     res.json({ totalUsers, users });
-    res.end()
 };
 
 const putUsers = async (req, res) => {
@@ -34,14 +33,13 @@ const putUsers = async (req, res) => {
     const user = await User.findByIdAndUpdate(id, newInfo)
 
     res.status(202).json(user)
-    res.end()
 }
 
 const postUsers = async (req, res) => {
 
-    const { name, mail, password, rol } = req.body
+    const { name, email, password, role } = req.body
     const user = new User({
-        name, mail, password, rol,
+        name, email, password, role,
     })
 
     //Ecrypt password
@@ -53,19 +51,14 @@ const postUsers = async (req, res) => {
         user
     })
 
-    res.end()
 }
 
 const deleteUsers = async (req, res) => {
 
     const { id } = req.params
-
     const user = await User.findByIdAndUpdate(id, { status: false })
+    res.json(user);
 
-    res.json({
-        user
-    });
-    res.end();
 }
 
 module.exports = {

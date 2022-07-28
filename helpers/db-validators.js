@@ -1,20 +1,20 @@
-const Rol = require('../models/rol')
+const Role = require('../models/role')
 const User = require('../models/user')
 const { Types } = require('mongoose')
 
-//Check if the rol is in DB
-const isValidRol = async (rol = '') => {
-  if (rol) {
-    const isRol = await Rol.findOne({ rol })
-    if (!isRol) throw new Error(`The role ${rol} is not registered in the DB`)
+//Check if the role is in DB
+const isValidRole = async (role = '') => {
+  if (role) {
+    const isRole = await Role.findOne({ role })
+    if (!isRole) throw new Error(`The role ${role} is not registered in the DB`)
   }
 }
 
 //Check for duplicated emails
-const isEmailDuplicated = async (mail = '') => {
-  const email = await User.findOne({ mail })
-  if (email) {
-    throw new Error(`The email: ${mail} is already in use`)
+const isEmailDuplicated = async (email = '') => {
+  const dupEmail = await User.findOne({ email })
+  if (dupEmail) {
+    throw new Error(`The email: ${dupEmail} is already in use`)
   }
 }
 
@@ -32,7 +32,7 @@ const isExistingUser = async (id = '') => {
 }
 
 module.exports = {
-  isValidRol,
+  isValidRole,
   isEmailDuplicated,
   isExistingUser
 }

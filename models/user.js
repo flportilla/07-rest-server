@@ -6,10 +6,10 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'Name is mandatory']
     },
-    mail:
+    email:
     {
         type: String,
-        required: [true, 'Mail is mandatory'],
+        required: [true, 'Email is mandatory'],
         unique: true
     },
     password:
@@ -18,7 +18,7 @@ const UserSchema = new Schema({
         required: [true, 'Password is mandatory']
     },
     img: String,
-    rol:
+    role:
     {
         type: String,
         required: [true, 'Password is mandatory'],
@@ -36,7 +36,8 @@ const UserSchema = new Schema({
 });
 
 UserSchema.methods.toJSON = function () {
-    const { __V, password, ...user } = this.toObject();
+    const { __v, password, _id, ...user } = this.toObject();
+    user.uid = _id
     return user
 }
 
