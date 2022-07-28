@@ -28,7 +28,6 @@ const putUsers = async (req, res) => {
         const salt = bcrypt.genSaltSync()
         newInfo.password = bcrypt.hashSync(password, salt)
     }
-
     const user = await User.findByIdAndUpdate(id, newInfo)
 
     res.status(202).json(user)
