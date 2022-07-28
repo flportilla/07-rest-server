@@ -1,5 +1,6 @@
 const { Router } = require('express')
 const { check } = require('express-validator')
+
 const { getUsers, putUsers, postUsers, deleteUsers } = require('../controllers/users.js');
 const { isValidRole, isEmailDuplicated, isExistingUser } = require('../helpers/db-validators.js');
 
