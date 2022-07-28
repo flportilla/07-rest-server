@@ -2,7 +2,7 @@
   "name": "rest-server",
   "version": "0.0.1",
   "description": "Rest server from the Nodejs course of Udemy",
-  "main": "index.js",
+  "main": "app.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node app.js",
