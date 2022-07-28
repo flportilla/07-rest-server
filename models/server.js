@@ -1,6 +1,6 @@
-const express = require('express');
-const cors = require('cors');
-const { dbConnect } = require('../db/config.js');
+const express = require('express')
+const cors = require('cors')
+const { dbConnect } = require('../db/config.js')
 
 class Server {
 
@@ -51,4 +51,4 @@ class Server {
     }
 }
 
-module.exports = { Server }
+module.exports = { Server };

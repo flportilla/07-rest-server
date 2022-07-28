@@ -1,7 +1,7 @@
 const { Router } = require('express')
 const { check } = require('express-validator')
-const { login } = require('../controllers/auth.js');
-const { fieldValidator } = require('../middlewares/field-validator.js');
+const { login } = require('../controllers/auth.js')
+const { fieldValidator } = require('../middlewares/field-validator.js')
 
 const router = Router()
 
