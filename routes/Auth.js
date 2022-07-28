@@ -1,7 +1,9 @@
 const { Router } = require('express')
 const { check } = require('express-validator')
-const { login } = require('../controllers/auth.js')
-const { fieldValidator } = require('../middlewares/field-validator.js')
+
+const { fieldValidator } = require('../middlewares')
+
+const { login, googleSingIn } = require('../controllers/auth')
 
 const router = Router()
 
@@ -10,5 +12,10 @@ router.post('/login', [
     check('password', 'The password is incorrect').not().isEmpty(),
     fieldValidator
 ], login);
+
+router.post('/google', [
+    check('id_token', 'The id_token is mandatory').not().isEmpty(),
+    fieldValidator
+], googleSingIn);
 
 module.exports = router

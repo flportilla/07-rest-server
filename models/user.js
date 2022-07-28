@@ -17,11 +17,12 @@ const UserSchema = new Schema({
         type: String,
         required: [true, 'Password is mandatory']
     },
-    img: String,
+    picture: String,
     role:
     {
         type: String,
-        required: [true, 'Password is mandatory'],
+        required: [true, 'Role is mandatory'],
+        default: "USER_ROLE"
     },
     status:
     {
