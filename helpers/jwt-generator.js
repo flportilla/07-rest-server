@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken')
-const secret = `${process.env.SECRETORPRIVATEKEY}`
+const secret = process.env.SECRET
 
 //Generate a JWT
 const tokenGenerator = (uid = '') => {

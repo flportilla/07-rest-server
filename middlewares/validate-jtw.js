@@ -1,6 +1,6 @@
 const { response, request } = require('express');
 const jwt = require('jsonwebtoken');
-const secret = `${process.env.SECRETORPRIVATEKEY}`
+const secret = process.env.SECRET
 const User = require('../models/user')
 
 const validateJWT = async (req = request, res = response, next) => {
