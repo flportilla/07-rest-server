@@ -1,7 +1,6 @@
 const { response, request } = require('express');
 const jwt = require('jsonwebtoken');
-const secret = process.env.SECRET
-const User = require('../models/user')
+const User = require('../models/User')
 
 const validateJWT = async (req = request, res = response, next) => {
 
@@ -15,7 +14,7 @@ const validateJWT = async (req = request, res = response, next) => {
     try {
 
         //get id from token
-        const { uid } = jwt.verify(token, secret);
+        const { uid } = jwt.verify(token, process.env.SECRET);
 
         //search user on DB
         const user = await User.findById(uid)
