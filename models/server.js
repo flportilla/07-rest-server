@@ -8,9 +8,9 @@ class Server {
         this.app = express();
         this.port = process.env.PORT;
 
-        this.authPath = '/api/auth'
-        this.usersPath = '/api/users'
-        this.URI = process.env.MONGO_URI
+        this.authPath = '/api/auth';
+        this.usersPath = '/api/users';
+        this.URI = process.env.MONGO_URI;
 
         //Connect to DB
         this.dbConnection()
