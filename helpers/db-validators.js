@@ -1,5 +1,5 @@
 const Role = require('../models/role.js')
-const User = require('../models/User.js')
+const User = require('../models/user.js')
 const { Types } = require('mongoose')
 
 //Check if the role is in DB

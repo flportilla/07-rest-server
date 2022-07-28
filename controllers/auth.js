@@ -1,5 +1,5 @@
 const { response } = require("express")
-const User = require('../models/User.js')
+const User = require('../models/user.js')
 const bcryptjs = require('bcryptjs')
 const { tokenGenerator } = require("../helpers/jwt-generator.js")
 
