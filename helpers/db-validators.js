@@ -1,4 +1,4 @@
-const Role = require('../models/role.js')
+const Role = require('../models/Role.js')
 const User = require('../models/User.js')
 const { Types } = require('mongoose')
 
