@@ -1,16 +1,19 @@
 const express = require('express');
 const cors = require('cors');
-const { dbConnect } = require('../db/config.js');
+const { dbConnect } = require('../db/config');
 
 class Server {
 
     constructor() {
         this.app = express();
-        this.port = process.env.PORT;
 
-        this.authPath = '/api/auth';
-        this.usersPath = '/api/users';
-        this.URI = process.env.MONGO_URI;
+        this.paths = {
+            auth: '/api/auth',
+            categories: '/api/categories',
+            users: '/api/users',
+            products: '/api/products',
+            searchs: '/api/search',
+        }
 
         //Connect to DB
         this.dbConnection()
@@ -36,18 +39,21 @@ class Server {
 
     routes() {
 
-        this.app.use(this.usersPath, require('../routes/Users.js'));
-        this.app.use(this.authPath, require('../routes/Auth.js'))
+        this.app.use(this.paths.auth, require('../routes/auth'))
+        this.app.use(this.paths.categories, require('../routes/categories'))
+        this.app.use(this.paths.users, require('../routes/users'));
+        this.app.use(this.paths.products, require('../routes/products'));
+        this.app.use(this.paths.searchs, require('../routes/search'));
     }
 
     listen() {
-        this.app.listen(this.port, () => {
-            console.log(`Server running at port ${this.port}`);
+        this.app.listen(process.env.PORT, () => {
+            console.log(`Server running at port ${process.env.PORT}`);
         })
     }
 
     dbConnection() {
-        dbConnect(this.URI)
+        dbConnect(process.env.MONGO_URI)
     }
 }
 

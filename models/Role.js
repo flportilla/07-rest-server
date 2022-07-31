@@ -6,6 +6,12 @@ const RoleSchema = new Schema({
     type: String,
     required: [true, 'Role is mandatory']
   }
-})
+});
+
+RoleSchema.methods.toJSON = function () {
+  const { __v, password, _id, ...role } = this.toObject();
+  role.uid = _id
+  return role
+}
 
 module.exports = model('Role', RoleSchema)

@@ -1,6 +1,10 @@
-const Role = require('../models/Role.js')
-const User = require('../models/User.js')
+const { Role, User, Category, Product } = require('../models')
 const { Types } = require('mongoose')
+
+
+/*
+*--------- User validators ---------
+**/
 
 //Check if the role is in DB
 const isValidRole = async (role = '') => {
@@ -31,8 +35,67 @@ const isExistingUser = async (id = '') => {
   }
 }
 
+/*
+*--------- Categories validators ---------
+**/
+
+//Check if exist category with ID
+const isExistingCategory = async (id = '') => {
+
+  if (!Types.ObjectId.isValid(id)) {
+    throw new Error(`This isn't a valid Mongoose ID`);
+  }
+
+  const existingCategory = await Category.findById(id)
+  if (!existingCategory) {
+    throw new Error(`The category with the id: ${id} doesn't exist on DB`)
+  }
+}
+
+//Check if name is already in use
+const isCategoryNameUsed = async (name = '') => {
+
+  const isNameUsed = await Category
+    .findOne({ name: `${name.toUpperCase()}` })
+
+  if (isNameUsed) {
+    throw new Error(`The name ${name.toUpperCase()} is already in use, please try a different one`)
+  }
+}
+
+
+/*
+*--------- Product validators ---------
+**/
+
+const isExistingProduct = async (id = '') => {
+
+  if (!Types.ObjectId.isValid(id)) {
+    throw new Error(`This isn't a valid Mongoose ID`);
+  }
+
+  const existingCategory = await Product.findById(id)
+  if (!existingCategory) {
+    throw new Error(`The product with the id: ${id} doesn't exist on DB`)
+  }
+}
+const isProductNameUsed = async (name = '') => {
+
+  const isNameUsed = await Product
+    .findOne({ name: `${name.toUpperCase()}` })
+
+  if (isNameUsed) {
+    throw new Error(`The name ${name.toUpperCase()} is already in use, please try a different one`)
+  }
+}
+
+
 module.exports = {
   isValidRole,
   isEmailDuplicated,
-  isExistingUser
+  isExistingUser,
+  isExistingCategory,
+  isCategoryNameUsed,
+  isExistingProduct,
+  isProductNameUsed,
 }

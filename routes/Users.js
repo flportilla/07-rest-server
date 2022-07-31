@@ -1,11 +1,23 @@
 const { Router } = require('express')
 const { check } = require('express-validator')
 
-const { getUsers, putUsers, postUsers, deleteUsers } = require('../controllers/Users.js')
-const { isValidRole, isEmailDuplicated, isExistingUser } = require('../helpers/db-validators.js')
+const {
+    getUsers,
+    putUsers,
+    postUsers,
+    deleteUsers
+} = require('../controllers')
+const {
+    isValidRole,
+    isEmailDuplicated,
+    isExistingUser
+} = require('../helpers/db-validators')
 
-const { fieldValidator, validateJWT, hasRole } = require('../middlewares')
-
+const {
+    fieldValidator,
+    validateJWT,
+    hasRole
+} = require('../middlewares')
 
 const router = Router()
 
