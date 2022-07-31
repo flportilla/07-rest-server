@@ -10,7 +10,7 @@ const RoleSchema = new Schema({
 
 RoleSchema.methods.toJSON = function () {
   const { __v, password, _id, ...role } = this.toObject();
-  role.uid = _id
+  role.id = _id
   return role
 }
 

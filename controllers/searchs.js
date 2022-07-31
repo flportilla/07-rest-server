@@ -78,7 +78,9 @@ const searchProducts = async (term = '', res = response) => {
     const isMongoId = ObjectId.isValid(term) //TRUE
 
     if (isMongoId) {
-        const product = await Product.findById(term)
+        const product = await Product
+            .findById(term)
+            .populate('category', 'name')
         return res.json({
             results: (product) ? [product] : []
         })
@@ -89,7 +91,7 @@ const searchProducts = async (term = '', res = response) => {
     const product = await Product.find({
         status: true,
         name: regexp
-    })
+    }).populate('category', 'name')
 
     const total = await Product.count({
         status: true,
