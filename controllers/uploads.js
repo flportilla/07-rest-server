@@ -122,11 +122,9 @@ const getFiles = async (req = request, res = response) => {
 
     if (model.picture) {
 
-        const picPath = path.join(__dirname, '../uploads', collection, model.picture);
-
-        if (fs.existsSync(picPath)) {
-            return res.sendFile(picPath)
-        }
+        return res.json({
+            urlPic: model.picture
+        })
     }
 
     const noImagePath = path.join(__dirname, '../assets/no-image.jpg')
@@ -188,6 +186,7 @@ const updateFilecloudinary = async (req = request, res = response) => {
     res.json({ model })
 
 }
+
 module.exports = {
     uploadFile,
     updateFile,
