@@ -63,7 +63,6 @@ const isCategoryNameUsed = async (name = '') => {
   }
 }
 
-
 /*
 *--------- Product validators ---------
 **/
@@ -89,6 +88,19 @@ const isProductNameUsed = async (name = '') => {
   }
 }
 
+/*
+*--------- Collection validators ---------
+**/
+
+const allowedCollections = (collection = '', collections = []) => {
+  const isIncluded = collections.includes(collection);
+
+  if (!isIncluded) {
+    throw new Error(`The collection ${collection} is not allowed, ${collections}`)
+  }
+
+  return true
+}
 
 module.exports = {
   isValidRole,
@@ -98,4 +110,5 @@ module.exports = {
   isCategoryNameUsed,
   isExistingProduct,
   isProductNameUsed,
+  allowedCollections
 }
