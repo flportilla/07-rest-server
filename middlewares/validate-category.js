@@ -1,4 +1,4 @@
-const { Category } = require("../models")
+const Category = require("../models/category")
 const { request, response } = require('express');
 
 const isValidCategory = async (req = request, res = response, next) => {

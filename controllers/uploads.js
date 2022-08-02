@@ -9,7 +9,8 @@ cloudinary.config(process.env.CLOUDINARY_URL)
 
 const uploadFiles = require("../helpers/upload-file");
 
-const { User, Product } = require('../models');
+const User = require('../models/user');
+const Product = require('../models/product');
 
 const uploadFile = async (req = request, res = response) => {
 

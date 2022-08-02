@@ -1,4 +1,7 @@
-const { Role, User, Category, Product } = require('../models')
+const Role = require('../models/role')
+const User = require('../models/user')
+const Category = require('../models/category')
+const Product = require('../models/product')
 const { Types } = require('mongoose')
 
 
