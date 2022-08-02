@@ -79,7 +79,7 @@ const drawMessages = (payload = []) => {
         <li>
             <p>
                 <span class="text-primary"> ${payload.name}:</span>
-                <span class="fs-6 text-muted">${payload.message}:</span>
+                <span class="fs-6 text-muted">${payload.message}</span>
             </p>
         </li>
         `
