@@ -8,7 +8,7 @@ const btnExit = document.querySelector('#btnExit');
 let user = null;
 let socket = null;
 
-const urlLocal = 'http://localhost:3030/api/auth/';
+const url = 'https://flportilla-server.herokuapp.com/api/auth/';
 
 //validate token from localstorage
 const validateJWT = async () => {
@@ -20,7 +20,7 @@ const validateJWT = async () => {
         throw new Error('Token is missing')
     };
 
-    const response = await fetch(urlLocal, {
+    const response = await fetch(url, {
         headers: { 'flserv-token': token }
     });
 
