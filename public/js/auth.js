@@ -7,7 +7,8 @@ const loginForm = document.querySelector('form');
 //     ? 'http://localhost:3030/api/auth/'
 //     : 'https://flportilla-server.herokuapp.com/api/auth/'
 
-const url = 'http://localhost:3030/api/auth/'
+// const url = 'http://localhost:3030/api/auth/'
+const url = 'https://flportilla-server.herokuapp.com/api/auth/'
 
 loginForm?.addEventListener('submit', (e) => {
     e.preventDefault();
